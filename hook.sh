@@ -153,8 +153,11 @@ function find_zone() {
   return 1
 }
 
-function exit_hook() {
-  exit 0
+exit_hook() {
+  # This hook is called at the end of a dehydrated command and can be used
+  # to do some final (cleanup or other) tasks.
+
+  aws s3 sync s3://${S3_BUCKET_NAME}/ /var/dehydrated
 }
 
 HANDLER="$1"; shift
