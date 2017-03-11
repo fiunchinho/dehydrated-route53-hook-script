@@ -157,7 +157,7 @@ exit_hook() {
   # This hook is called at the end of a dehydrated command and can be used
   # to do some final (cleanup or other) tasks.
 
-  s3cmd sync /var/dehydrated s3://${S3_BUCKET_NAME}/
+  aws s3 sync /var/dehydrated s3://${S3_BUCKET_NAME}/
 }
 
 HANDLER="$1"; shift
