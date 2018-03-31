@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+AWS_REGION=${AWS_REGION:=eu-west-1}
+
 #
 # Dehydrated hook script that employs cli53 to enable dns-01 challenges with AWS Route 53
 # - Will automatically identify the correct Route 53 zone for each domain name
@@ -157,7 +159,7 @@ exit_hook() {
   # This hook is called at the end of a dehydrated command and can be used
   # to do some final (cleanup or other) tasks.
 
-  aws s3 sync --no-follow-symlinks /var/dehydrated s3://${S3_BUCKET_NAME}/
+  aws s3 sync --no-follow-symlinks /var/dehydrated s3://${S3_BUCKET_NAME}/ --region ${AWS_REGION}
 }
 
 HANDLER="$1"; shift
